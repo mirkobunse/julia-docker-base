@@ -3,7 +3,14 @@ EXAMPLE_TAG_NAME = "bunse/julia-docker-base-example"
 
 image:
 	docker build --tag $(TAG_NAME) .
+
 example:
-	docker build --tag $(EXAMPLE_TAG_NAME) example
+	docker build \
+	  --build-arg group=`id --group --name` \
+	  --build-arg gid=`id --group` \
+	  --build-arg user=`id --user --name` \
+	  --build-arg uid=`id --user` \
+	  --tag $(EXAMPLE_TAG_NAME) \
+	  example
 
 .PHONY: image example
