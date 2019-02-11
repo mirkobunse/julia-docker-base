@@ -2,12 +2,6 @@ FROM julia:0.6.4
 
 MAINTAINER Mirko Bunse <mirko.bunse@cs.tu-dortmund.de>
 
-# auxiliary tools
-RUN apt-get update && \
-    apt-get install -y \
-      nano \
-      less
-
 # copy setup to /opt/julia-docker-base and initialize the package depot
 ADD julia-docker-base/ /opt/julia-docker-base/
 RUN julia -e 'Pkg.init()'
