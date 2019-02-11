@@ -13,11 +13,10 @@ ADD julia-docker-base/ /opt/julia-docker-base/
 RUN julia -e 'Pkg.init()'
 
 # configure builds which use this image as a base image
-ONBUILD ADD REQUIRE  /opt/julia-docker-base
-ONBUILD ADD setup.jl /opt/julia-docker-base
-ONBUILD RUN julia -O /opt/julia-docker-base/resolve.jl
-ONBUILD RUN julia -O /opt/julia-docker-base/precompile.jl
-ONBUILD RUN julia -O /opt/julia-docker-base/setup.jl
+ONBUILD ADD REQUIRE setup.jl   /opt/julia-docker-base/
+ONBUILD RUN julia --optimize=3 /opt/julia-docker-base/resolve.jl
+ONBUILD RUN julia --optimize=3 /opt/julia-docker-base/precompile.jl
+ONBUILD RUN julia --optimize=3 /opt/julia-docker-base/setup.jl
 
 # configure entry point
 ENTRYPOINT ["/opt/julia-docker-base/entrypoint.sh"]
