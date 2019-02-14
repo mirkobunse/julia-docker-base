@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.com/mirkobunse/julia-docker-base.svg?branch=master)](https://travis-ci.com/mirkobunse/julia-docker-base)
+
 # julia-docker-base
 
 This base image eases the deployment of Julia applications in Docker.
@@ -33,9 +35,9 @@ Take a look at the `example` directory of this repository to see how it works.
 
 ## Custom Builds
 
-This image contains `custom-` tags which do not define any `ONBUILD` steps.
+This image contains `custom-*` tags which do not define any `ONBUILD` steps.
 These tags are meant for user who wish for more control over their build process.
-If you use a `custom-` tag, you can perform the following steps in your
+If you use a `custom-*` tag, you can perform the following steps in your
 Dockerfile to achieve the default behaviour:
 
       ADD julia-docker-base /opt/julia-docker-base/
