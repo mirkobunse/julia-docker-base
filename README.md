@@ -7,13 +7,15 @@ which for example resolve dependencies provided by a REQUIRE-file.
 ## Usage
 
 Simply specify `bunse/julia-docker-base` as your base image, using the `FROM` statement
-in your Dockerfile. Make sure you have the following files in your build context:
+in your Dockerfile. Your project directory should contain a folder `julia-docker-base`
+which contains three files to be used in the `ONBUILD` steps.
 
       your-project/
       ├── Dockerfile
-      ├── prepare.sh
-      ├── REQUIRE
-      └── setup.jl
+      └── julia-docker-base/
+          ├── prepare.sh
+          ├── REQUIRE
+          └── setup.jl
 
 - `Dockerfile` is just like any other Dockerfile
 - `prepare.sh` performs whatever is needed before the Julia packages are installed.
@@ -24,7 +26,7 @@ in your Dockerfile. Make sure you have the following files in your build context
   [official Julia manual](https://docs.julialang.org/en/v0.6/manual/packages/#Requirements-Specification-1).
 - `setup.jl` performs any additional steps, like cloning un-registered packages.
 
-Each of these files can be empty, but must be present in the build context.
+You can omit any of the files in your julia-docker-base directory.
 Take a look at the `example` directory of this repository to see how it works.
 
       make example
