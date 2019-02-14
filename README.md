@@ -30,3 +30,16 @@ You can omit any of the files in your julia-docker-base directory.
 Take a look at the `example` directory of this repository to see how it works.
 
       make example
+
+## Custom Builds
+
+This image contains `custom-` tags which do not define any `ONBUILD` steps.
+These tags are meant for user who wish for more control over their build process.
+If you use a `custom-` tag, you can perform the following steps in your
+Dockerfile to achieve the default behaviour:
+
+      ADD julia-docker-base /opt/julia-docker-base/
+      RUN /bin/bash /opt/julia-docker-base/prepare.sh
+      RUN julia --optimize=3 /opt/julia-docker-base/resolve.jl
+      RUN julia --optimize=3 /opt/julia-docker-base/precompile.jl
+      RUN julia --optimize=3 /opt/julia-docker-base/setup.jl

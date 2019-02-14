@@ -1,8 +1,15 @@
 TAG_NAME         = "bunse/julia-docker-base:0.6.4"
+CUSTOM_TAG_NAME  = $(subst :,:custom-,$(TAG_NAME))
 EXAMPLE_TAG_NAME = "bunse/julia-docker-base-example"
 
-image:
-	docker build --tag $(TAG_NAME) .
+image: custom
+	docker build \
+	  --tag $(TAG_NAME) .
+
+custom:
+	docker build \
+	  --file=Dockerfile_custom \
+	  --tag $(CUSTOM_TAG_NAME) .
 
 example:
 	docker build \
@@ -13,4 +20,4 @@ example:
 	  --tag $(EXAMPLE_TAG_NAME) \
 	  example
 
-.PHONY: image example
+.PHONY: image custom example
