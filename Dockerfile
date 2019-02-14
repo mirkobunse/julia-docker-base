@@ -1,4 +1,4 @@
-FROM bunse/julia-docker-base:custom-0.6.4
+FROM bunse/julia-docker-base:custom
 
 MAINTAINER Mirko Bunse <mirko.bunse@cs.tu-dortmund.de>
 
