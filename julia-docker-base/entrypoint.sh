@@ -4,7 +4,7 @@ case "$1" in
         exec /bin/bash
         ;;
     julia) # run julia with arguments
-        /bin/julia "${@:2}"
+        $JULIA_PATH/bin/julia "${@:2}"
         ;;
     *)
         echo "ERROR: Missing argument in entrypoint.sh"
