@@ -4,6 +4,7 @@ TAG_VERSION = "0.6.4"
 # build the custom and the default tag
 image:
 	docker build \
+	  --build-arg JULIA_VERSION=$(TAG_VERSION) \
 	  --file=Dockerfile_custom \
 	  --tag $(TAG_NAME):custom \
 	  --tag $(TAG_NAME):$(TAG_VERSION)-custom \
