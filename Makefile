@@ -1,25 +1,25 @@
-TAG_NAME    = "bunse/julia-docker-base"
-TAG_VERSION = "0.6.4"
+IMAGE_NAME    = "bunse/julia-docker-base"
+JULIA_VERSION = "0.6.4"
 
 # build the custom and the default tag
 image:
 	docker build \
-	  --build-arg JULIA_VERSION=$(TAG_VERSION) \
+	  --build-arg JULIA_VERSION=$(JULIA_VERSION) \
 	  --file=Dockerfile_custom \
-	  --tag $(TAG_NAME):custom \
-	  --tag $(TAG_NAME):$(TAG_VERSION)-custom \
+	  --tag $(IMAGE_NAME):custom \
+	  --tag $(IMAGE_NAME):$(JULIA_VERSION)-custom \
 	  .
 	docker build \
-	  --tag $(TAG_NAME):latest \
-	  --tag $(TAG_NAME):$(TAG_VERSION) \
+	  --tag $(IMAGE_NAME):latest \
+	  --tag $(IMAGE_NAME):$(JULIA_VERSION) \
 	  .
 
 # push to a docker repository (e.g. DockerHub)
 push:
-	docker push $(TAG_NAME):custom
-	docker push $(TAG_NAME):$(TAG_VERSION)-custom
-	docker push $(TAG_NAME):latest
-	docker push $(TAG_NAME):$(TAG_VERSION)
+	docker push $(IMAGE_NAME):custom
+	docker push $(IMAGE_NAME):$(JULIA_VERSION)-custom
+	docker push $(IMAGE_NAME):latest
+	docker push $(IMAGE_NAME):$(JULIA_VERSION)
 
 # build the example
 example:
@@ -28,7 +28,7 @@ example:
 	  --build-arg gid=`id --group` \
 	  --build-arg user=`id --user --name` \
 	  --build-arg uid=`id --user` \
-	  --tag $(TAG_NAME)-example \
+	  --tag $(IMAGE_NAME)-example \
 	  example
 
 .PHONY: image push example
