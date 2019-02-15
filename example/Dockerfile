@@ -14,15 +14,10 @@ ARG gid
 ARG user
 ARG uid
 
-# create a user from the build-time variables
+# create $user and make our Julia installation accessible
 RUN groupadd --gid $gid $group && \
-    useradd  --gid $gid --uid $uid -d /home/$user $user
-
-# make our julia installation belong to $user
-RUN ln -s /root /home/$user && \
-    chown --recursive $uid:$gid \
-      /home/$user \
-      /root
+    useradd  --gid $gid --uid $uid --create-home $user && \
+    chmod --recursive a+rwx $JULIA_PKGDIR
 
 # also, I am always annoyed by 'll' not being recognized
 RUN echo "alias ll='ls -halF'" >> /home/$user/.bashrc

@@ -3,8 +3,10 @@ FROM julia:0.6.4
 MAINTAINER Mirko Bunse <mirko.bunse@cs.tu-dortmund.de>
 
 # copy setup to /opt/julia-docker-base and initialize the package depot
+ENV JULIA_PKGDIR=/opt/julia-pkg
 ADD julia-docker-base/ /opt/julia-docker-base/
-RUN julia -e 'Pkg.init()'
+RUN mkdir -p $JULIA_PKGDIR && \
+    julia -e 'Pkg.init()'
 
 # the custom tag does not add any files, neither runs any ONBUILD steps
 
