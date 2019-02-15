@@ -1,4 +1,4 @@
-FROM bunse/julia-docker-base:0.6.4
+FROM bunse/julia-docker-base:latest
 
 MAINTAINER Mirko Bunse <mirko.bunse@cs.tu-dortmund.de>
 
@@ -17,7 +17,7 @@ ARG uid
 # create $user and make our Julia installation accessible
 RUN groupadd --gid $gid $group && \
     useradd  --gid $gid --uid $uid --create-home $user && \
-    chmod --recursive a+rwx $JULIA_PKGDIR
+    chown --recursive $uid:$gid $JULIA_PKGDIR
 
 # also, I am always annoyed by 'll' not being recognized
 RUN echo "alias ll='ls -halF'" >> /home/$user/.bashrc
